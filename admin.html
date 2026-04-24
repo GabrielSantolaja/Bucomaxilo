@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - Blog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --success: #27ae60;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+      --light: #ecf0f1;
+      --dark: #34495e;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* ==================== LOGIN ==================== */
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+
+    .login-container .form-group {
+      margin-bottom: 20px;
+    }
+
+    .login-container label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--light);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .login-container input:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background: #2980b9;
+    }
+
+    .error-message {
+      color: var(--danger);
+      text-align: center;
+      margin-top: 15px;
+      display: none;
+    }
+
+    /* ==================== ADMIN PANEL ==================== */
+    .admin-panel {
+      display: none;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .admin-header h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    .btn-logout {
+      padding: 10px 20px;
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-logout:hover {
+      background: #c0392b;
+    }
+
+    .admin-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+    }
+
+    /* ==================== FORM ==================== */
+    .blog-form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .blog-form-container h2 {
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--light);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .image-upload {
+      border: 2px dashed var(--light);
+      padding: 30px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .image-upload:hover {
+      border-color: var(--secondary);
+      background: #f8f9fa;
+    }
+
+    .image-upload i {
+      font-size: 3rem;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .image-preview {
+      margin-top: 15px;
+      max-width: 100%;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #229954;
+    }
+
+    .btn-cancel {
+      width: 100%;
+      padding: 15px;
+      background: var(--light);
+      color: var(--dark);
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-cancel:hover {
+      background: #d5dbdb;
+    }
+
+    /* ==================== POSTS LIST ==================== */
+    .posts-list-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .posts-list-container h2 {
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+
+    .post-item {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s;
+    }
+
+    .post-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .post-info h3 {
+      color: var(--primary);
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    .post-info p {
+      color: var(--dark);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .post-date {
+      font-size: 0.85rem;
+      color: #7f8c8d;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-edit,
+    .btn-delete {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-edit {
+      background: var(--warning);
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background: #d68910;
+    }
+
+    .btn-delete {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background: #c0392b;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #7f8c8d;
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      opacity: 0.3;
+    }
+
+    /* ==================== RESPONSIVO ==================== */
+    @media (max-width: 968px) {
+      .admin-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .success-message {
+      background: var(--success);
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== TELA DE LOGIN ==================== -->
+  <div class="login-container" id="loginContainer">
+    <h2><i class="fas fa-lock"></i> Login Admin</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit">Entrar</button>
+      <p class="error-message" id="errorMessage">Usuário ou senha incorretos!</p>
+    </form>
+    <p style="margin-top: 20px; text-align: center; color: #7f8c8d; font-size: 0.9rem;">
+      <strong>Padrão:</strong> admin / admin123
+    </p>
+  </div>
+
+  <!-- ==================== PAINEL ADMIN ==================== -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+      <h1><i class="fas fa-blog"></i> Gerenciar Blog</h1>
+      <button class="btn-logout" id="btnLogout">
+        <i class="fas fa-sign-out-alt"></i> Sair
+      </button>
+    </div>
+
+    <div class="admin-content">
+      <!-- FORMULÁRIO -->
+      <div class="blog-form-container">
+        <h2 id="formTitle">
+          <i class="fas fa-plus-circle"></i> Novo Post
+        </h2>
+        
+        <div class="success-message" id="successMessage">
+          <i class="fas fa-check-circle"></i> Post salvo com sucesso!
+        </div>
+
+        <form id="blogForm">
+          <input type="hidden" id="postId">
+          
+          <div class="form-group">
+            <label for="postTitle">Título do Post *</label>
+            <input type="text" id="postTitle" required placeholder="Ex: A importância da cirurgia ortognática">
+          </div>
+
+          <div class="form-group">
+            <label for="postExcerpt">Resumo *</label>
+            <textarea id="postExcerpt" required placeholder="Breve descrição do post (1-2 linhas)"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="postContent">Conteúdo Completo *</label>
+            <textarea id="postContent" required placeholder="Escreva o conteúdo completo do post aqui..." rows="8"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="postCategory">Categoria</label>
+            <select id="postCategory">
+              <option value="Cirurgia Ortognática">Cirurgia Ortognática</option>
+              <option value="ATM">Tratamento de ATM</option>
+              <option value="Pacientes Especiais">Pacientes Especiais</option>
+              <option value="Dicas">Dicas e Cuidados</option>
+              <option value="Novidades">Novidades</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Imagem do Post</label>
+            <div class="image-upload" id="imageUpload">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Clique ou arraste uma imagem</p>
+              <input type="file" id="postImage" accept="image/*" style="display: none;">
+            </div>
+            <img id="imagePreview" class="image-preview" alt="Preview">
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-save"></i> Publicar Post
+          </button>
+          <button type="button" class="btn-cancel" id="btnCancel" style="display: none;">
+            <i class="fas fa-times"></i> Cancelar Edição
+          </button>
+        </form>
+      </div>
+
+      <!-- LISTA DE POSTS -->
+      <div class="posts-list-container">
+        <h2><i class="fas fa-list"></i> Posts Publicados</h2>
+        <div id="postsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

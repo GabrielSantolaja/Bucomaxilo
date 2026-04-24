@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="theme-color" content="#0a2540" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=yes" />
+  <title>Dr. Anizzolavo Jesus - Cirurgia Ortognática e ATM</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A6%B7%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css?v=20260324-1" />
+  <link rel="stylesheet" href="modern-effects.css?v=20260324-1" />
+  <link rel="stylesheet" href="responsive-complete.css?v=20260324-1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    .logo h1 {
+      font-family: 'Cinzel', serif !important;
+      color: #0F0F59 !important;
+      -webkit-text-fill-color: #0F0F59 !important;
+    }
+
+    .logo h1::after {
+      background: linear-gradient(90deg, #0F0F59, transparent) !important;
+    }
+
+    .logo-subtitle {
+      color: #0F0F59 !important;
+    }
+  </style>
+  
+  <style>
+    /* Estilos adicionais para garantir funcionamento do admin */
+    .admin-panel-integrated * {
+      box-sizing: border-box;
+    }
+    
+    .admin-panel-integrated textarea {
+      font-family: inherit;
+      resize: vertical;
+    }
+    
+    .admin-panel-integrated .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    
+    .admin-panel-integrated .form-group input,
+    .admin-panel-integrated .form-group textarea,
+    .admin-panel-integrated .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+    
+    .admin-panel-integrated .form-group input:focus,
+    .admin-panel-integrated .form-group textarea:focus,
+    .admin-panel-integrated .form-group select:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    
+    .modal-form input::placeholder,
+    .modal-form textarea::placeholder,
+    .admin-panel-integrated input::placeholder,
+    .admin-panel-integrated textarea::placeholder {
+      color: #95a5a6;
+    }
+    
+    /* Fix para o painel não sobrepor incorretamente */
+    body.admin-open {
+      overflow: hidden;
+    }
+    
+    /* Garantir que botões tenham cursor pointer */
+    button, .btn-admin-menu, .admin-dropdown-item {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Botão WhatsApp Flutuante -->
+  <a href="https://api.whatsapp.com/send?phone=5511953415380&text=Olá,%20estou%20no%20site%20e%20gostaria%20de%20agendar%20uma%20consulta" 
+     class="whatsapp-float" target="_blank" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Cabeçalho / Navbar -->
+  <header class="header">
+    <nav class="navbar container">
+      <div class="logo">
+        <img src="imagens/logo-bucoA.png" alt="Ícone da logo" class="logo-dr-icon" loading="eager" />
+        <div class="logo-text-group">
+          <h1>Dr. Anizzolavo Jesus</h1>
+          <p class="logo-subtitle">CIRURGIA BUCOMAXILOFACIAL</p>
+        </div>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#casos">Casos</a></li>
+        <li><a href="#procedimento">Procedimento</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li class="mobile-only"><a href="#" id="btnAdminMenuMobile"><i class="fas fa-user-lock"></i> Entrar no Admin</a></li>
+      </ul>
+      <div class="header-actions">
+        <!-- Botão Menu 3 Pontos -->
+        <button class="btn-admin-menu" id="btnAdminMenu" title="Menu">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dropdown Menu Admin -->
+  <div class="admin-dropdown" id="adminDropdown">
+    <div class="admin-dropdown-item" id="btnLogin">
+      <i class="fas fa-user-lock"></i>
+      <span>Área do Admin</span>
+    </div>
+  </div>
+
+  <!-- Seção Hero -->
+  <section id="inicio" class="hero" data-scroll-section>
+    <div class="hero-container container">
+      <div class="hero-content-left">
+        <!-- Badge de Cases de Sucesso -->
+        <div class="success-badge">
+          <div class="success-avatars">
+            <img src="imagens/caso6.jpg" alt="Caso 6">
+            <img src="imagens/caso7.jpg" alt="Caso 7">
+            <img src="imagens/caso8.jpg" alt="Caso 8">
+          </div>
+          <span>Somos + 2 mil casos de sucesso</span>
+        </div>
+        
+        <!-- Título Principal -->
+        <h1 class="hero-title-main">
+          Existe uma solução definitiva que melhora o seu sono, alivia suas dores em face e transforma sua qualidade de vida.
+        </h1>
+        
+        <!-- Botão CTA -->
+        <a href="https://api.whatsapp.com/send?phone=5511953415380&text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação" 
+           class="btn-cta" target="_blank">
+          <span>Agendar uma Avaliação</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        
+        <!-- Texto Secundário -->
+        <p class="hero-description">
+          Especialista em Cirurgia Bucomaxilofacial, com foco em Cirurgia do sono e tratamento de DTM/Bruxismo....
+        </p>
+      </div>
+      
+      <!-- Foto do Profissional -->
+      <div class="hero-image-right">
+        <img src="imagens/dr.jpg" alt="Dr. Anizzolavo" class="hero-photo">
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos (Antes e Depois) -->
+  <section id="casos" class="antes-depois">
+    <div class="container">
+      <h2 class="section-title">Centenas de transformações já passaram por nossa clínica</h2>
+      <p class="section-subtitle">Pessoas que, assim como você, buscavam mais que um resultado estético temporário.<br>
+      <strong>Elas decidiram investir na própria autoestima, bem-estar e saúde.</strong></p>
+      
+      <div class="antes-depois-slider">
+        <div class="slider-item">
+          <div class="comparison-image">
+            <div class="image-before">
+              <img src="imagens/caso4antes.jpeg" alt="Antes do caso 4" loading="lazy">
+              <span>Antes</span>
+            </div>
+            <div class="image-after">
+              <img src="imagens/caso4depois.jpeg" alt="Depois do caso 4" loading="lazy">
+              <span>Depois</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="casos-actions">
+        <a href="https://api.whatsapp.com/send?phone=5511953415380&text=Olá,%20estou%20no%20site%20e%20gostaria%20de%20agendar%20uma%20consulta" 
+           class="btn-primary" target="_blank">
+          Agendar uma Avaliação
+        </a>
+        <a href="casos.html" class="btn-primary">
+          Ver mais casos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos-video" class="antes-depois antes-depois-video">
+    <div class="container">
+      <h2 class="section-title">Antes e Depois em Vídeo</h2>
+      <p class="section-subtitle">Veja uma transformação real em vídeo.</p>
+
+      <div class="antes-depois-slider">
+        <div class="slider-item">
+          <div class="before-after-video-card">
+            <video controls autoplay muted loop playsinline preload="auto" class="before-after-video" id="beforeAfterVideoMain">
+              <source src="imagens/WhatsApp%20Video%202026-03-11%20at%2017.58.18.mp4#t=0.1" type="video/mp4">
+              Seu navegador não suporta reprodução de vídeo.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre o Profissional -->
+  <section id="sobre" class="sobre" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Por que escolher o Dr. Anizzolavo Jesus?</h2>
+      <div class="sobre-content">
+        <div class="sobre-text" data-aos="fade-right">
+          <h3>Um dos profissionais mais respeitados na área bucomaxilofacial.</h3>
+          <p>Com formação especializada e centenas de planejamentos realizados com sucesso, conheça mais abaixo:</p>
+          
+          <ul class="features-list credentials-list">
+            <li><i class="fas fa-check-circle"></i> <strong>Cirurgião Bucomaxilofacial pelo o CFO</strong></li>
+            <li><i class="fas fa-check-circle"></i> <strong>Residência em Cirurgia Bucomaxilo com mais de 7400 horas</strong></li>
+            <li><i class="fas fa-check-circle"></i> <strong>Certificação Internacional de Expertise Pela Associação Latino Americana Board/Alacibu</strong></li>
+            <li><i class="fas fa-check-circle"></i> <strong>Membro Efetivo do Colégio Brasileiro de Cirurgia Bucomaxilofacial</strong></li>
+            <li><i class="fas fa-check-circle"></i> <strong>Mestrado em Disfunção temporo-mandibular e dor orofacial</strong></li>
+          </ul>
+          
+          <p><strong>Especializado em:</strong></p>
+          <ul class="features-list">
+            <li><i class="fas fa-star"></i> Tratamento de ronco e apnéia do sono</li>
+            <li><i class="fas fa-star"></i> Tratamento Cirúrgico e Conservador de ATM</li>
+            <li><i class="fas fa-star"></i> Cirurgia Ortognática minimamente invasiva</li>
+          </ul>
+          
+           <a href="https://api.whatsapp.com/send?phone=5511953415380&text=Olá,%20quero%20conhecer%20mais%20sobre%20os%20tratamentos" 
+             class="btn-secondary" target="_blank">Falar com a equipe</a>
+        </div>
+        <div class="sobre-image" data-aos="fade-left">
+          <img src="imagens/dr2.jpg" alt="Dr. Anizzolavo Jesus">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Procedimento -->
+  <section id="procedimento" class="especialidades" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Por que a cirurgia ortognática é diferente de tudo que você já tentou?</h2>
+      <p class="section-subtitle">A harmonização facial maqueia. A ortognática <strong>soluciona a causa do desconforto</strong>.</p>
+      <p class="section-subtitle">Com esse procedimento, você pode resolver:</p>
+      
+      <div class="especialidades-grid">
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h3>Assimetrias e desproporções no rosto</h3>
+          <p>Correção definitiva de discrepâncias faciais e maxilares, promovendo equilíbrio funcional e estético.</p>
+        </div>
+        
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-lungs"></i>
+          </div>
+          <h3>Problemas funcionais</h3>
+          <p>Ronco, apneia obstrutiva do sono, dificuldades na mastigação e respiração.</p>
+        </div>
+        
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-teeth"></i>
+          </div>
+          <h3>Mordida desalinhada</h3>
+          <p>Retração do queixo, mordida cruzada e outros problemas de oclusão.</p>
+        </div>
+        
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Dificuldades na fala</h3>
+          <p>Problemas de dicção causados por estruturas ósseas desalinhadas.</p>
+        </div>
+        
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-head-side-mask"></i>
+          </div>
+          <h3>Tratamento de ATM</h3>
+          <p>Alívio definitivo da dor e disfunção da articulação temporomandibular.</p>
+        </div>
+        
+        <div class="especialidade-card" data-aos="fade-up">
+          <div class="card-icon">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <h3>Pacientes Especiais</h3>
+          <p>Atendimento humanizado e especializado para pacientes com necessidades especiais.</p>
+        </div>
+      </div>
+      
+      <p class="section-highlight" data-aos="fade-up">E o melhor: <strong>os resultados são permanentes.</strong></p>
+    </div>
+  </section>
+
+  <!-- Redes Sociais -->
+  <section id="redes" class="social-section">
+    <div class="container">
+      <div class="social-grid">
+        <div class="social-content">
+          <span class="social-eyebrow">Redes sociais</span>
+          <h2 class="section-title">Acompanhe o Dr. Anizzolavo no Instagram</h2>
+          <p class="section-subtitle"> Conheça a pessoa por trás do Cirurgião, o pai e esposo Anizzolavo</p>
+
+          <div class="social-actions">
+            <a href="https://www.instagram.com/anizzolavo.jesus?igsh=MXJiaTZ3NTVyZWU5MQ==" class="btn-primary" target="_blank" rel="noopener">Ver Instagram</a>
+            <div class="social-handle">
+              <i class="fab fa-instagram"></i>
+              <span>@anizzolavo.jesus</span>
+            </div>
+          </div>
+
+          <ul class="social-highlights">
+            <li><i class="fas fa-check-circle"></i> Conteúdos, casos reais e dicas de saúde bucal em um só lugar</li>
+            <li><i class="fas fa-check-circle"></i> Casos antes e depois</li>
+            <li><i class="fas fa-check-circle"></i> Bastidores do consultório</li>
+          </ul>
+        </div>
+
+        <div class="phone-mockup" aria-hidden="true">
+          <div class="phone-notch"></div>
+          <div class="phone-screen phone-screen-full">
+            <img src="imagens/perfil-insta.jpeg" alt="Prévia do Instagram no celular" class="phone-screen-image" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz-apneia" class="quiz-apneia">
+    <div class="container">
+      <div class="quiz-apneia-header">
+        <h2 class="section-title">Quer descobrir se tem apneia do sono? Faça o quiz.</h2>
+      </div>
+
+      <div id="apneaQuizIntro" class="quiz-intro">
+        <button type="button" id="apneaQuizStart" class="btn-primary quiz-start-btn">Fazer quiz</button>
+      </div>
+
+      <div id="apneaQuizStep" class="quiz-step-card" style="display: none;">
+        <div class="quiz-progress" id="apneaQuizProgress">Pergunta 1 de 10</div>
+        <h3 id="apneaQuestionText"></h3>
+        <div class="quiz-options" id="apneaOptions"></div>
+        <p id="apneaQuizError" class="quiz-error" style="display: none;">Selecione uma resposta para continuar.</p>
+
+        <div class="quiz-nav">
+          <button type="button" id="apneaPrevBtn" class="btn-secondary">Voltar</button>
+        </div>
+      </div>
+
+      <div id="apneaQuizResult" class="quiz-result" style="display: none;">
+        <h3>Seu resultado estimado: <span id="apneaScore">0%</span></h3>
+        <p id="apneaRiskText"></p>
+        <div class="quiz-result-actions">
+          <a id="apneaWhatsappBtn" class="btn-primary" target="_blank" rel="noopener">Fazer avaliação</a>
+          <button type="button" id="apneaRetryBtn" class="btn-primary">Fazer novamente</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos" class="depoimentos">
+    <div class="container">
+      <h2 class="section-title">Depoimentos</h2>
+      <p class="section-subtitle">Veja o que nossos pacientes têm a dizer</p>
+      
+      <!-- Lista de Depoimentos Aprovados -->
+      <div class="depoimentos-grid" id="depoimentosAprovados">
+        <!-- Depoimentos serão carregados aqui via JavaScript -->
+      </div>
+      
+      <!-- Botão para deixar avaliação -->
+      <div class="avaliar-cta">
+        <button class="btn-primary" id="btnDeixarAvaliacao">
+          <i class="fas fa-star"></i> Deixe sua Avaliação
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Formulário de Avaliação -->
+  <div class="modal-overlay" id="modalAvaliacao">
+    <div class="modal-container modal-avaliacao">
+      <button class="modal-close" onclick="closeModal('modalAvaliacao')">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <i class="fas fa-star"></i>
+        <h2>Deixe sua Avaliação</h2>
+        <p>Sua opinião é muito importante para nós!</p>
+      </div>
+      
+      <form id="formAvaliacao" class="modal-form">
+        <div class="form-group">
+          <label>
+            <i class="fas fa-star"></i> Sua Avaliação *
+          </label>
+          <div class="rating-stars" id="ratingStars">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+          <input type="hidden" id="avaliacaoRating" required>
+          <small class="rating-text">Clique nas estrelas para avaliar</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="avaliacaoNome">
+            <i class="fas fa-user"></i> Seu Nome *
+          </label>
+          <input type="text" id="avaliacaoNome" required placeholder="Digite seu nome completo">
+        </div>
+        
+        <div class="form-group">
+          <label for="avaliacaoEmail">
+            <i class="fas fa-envelope"></i> Seu E-mail
+          </label>
+          <input type="email" id="avaliacaoEmail" placeholder="seuemail@exemplo.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="avaliacaoComentario">
+            <i class="fas fa-comment"></i> Seu Comentário *
+          </label>
+          <textarea id="avaliacaoComentario" required placeholder="Conte-nos sobre sua experiência..." rows="5"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="avaliacaoAutorizar" required>
+            Autorizo a publicação desta avaliação no site
+          </label>
+        </div>
+        
+        <button type="submit" class="btn-modal-primary">
+          <i class="fas fa-paper-plane"></i> Enviar Avaliação
+        </button>
+        
+        <p class="form-note">
+          <i class="fas fa-info-circle"></i> Sua avaliação será analisada antes de ser publicada.
+        </p>
+      </form>
+    </div>
+  </div>
+            <div class="depoimento-author">
+            
+              <div class="stars">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="blog">
+    <div class="container">
+      <h2 class="section-title">Blog do Dr.</h2>
+      
+      <div class="blog-grid">
+        <article class="blog-card">
+          <div class="blog-image"></div>
+          <div class="blog-content">
+            <h3>Em breve: blogs diários do Dr.</h3>
+            <p>Estamos preparando conteúdos exclusivos sobre cirurgia bucomaxilofacial, sono, ATM e recuperação dos pacientes.</p>
+          </div>
+        </article>
+      </div>
+      
+      <div class="blog-cta">
+        <a href="#blog" class="btn-secondary">Novos conteúdos em breve</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-carousel">
+    <div class="container">
+      <div class="carousel-header">
+        <h2 class="section-title">Esclareça suas dúvidas com os vídeos abaixo e entre em contato conosco</h2>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn" id="videoPrev" aria-label="Vídeo anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button type="button" class="carousel-btn" id="videoNext" aria-label="Próximo vídeo">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="carousel-track" id="videoCarousel">
+        <div class="video-card">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/EQqOWVJ1Wi8" title="Vídeo do Dr. Anizzolavo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Conteúdo do canal do Dr. Anizzolavo</h3>
+        </div>
+        <div class="video-card">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/5hHUZJgpu7c" title="Vídeo do Dr. Anizzolavo 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>Conteúdo do canal do Dr. Anizzolavo</h3>
+        </div>
+      </div>
+
+      <p class="section-subtitle">Confira os conteúdos em vídeo do Dr. Anizzolavo no YouTube.</p>
+      <div class="casos-actions">
+        <a href="https://www.youtube.com/@anizzolavojesusrodriguespe9303" class="btn-primary" target="_blank" rel="noopener">Ver canal no YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-final">
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <h2>Cuide do seu bem mais importante: Sua saúde. Melhore seu sono, mastigação e sorriso.</h2>
+      <p>Agende sua consulta hoje mesmo e dê o primeiro passo em direção a uma vida mais saudável e confiante.</p>
+      <a href="https://api.whatsapp.com/send?phone=5511953415380&text=Olá,%20estou%20no%20site%20e%20gostaria%20de%20agendar%20uma%20consulta" 
+         class="btn-primary" target="_blank">
+        Agende sua consulta agora!
+      </a>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="contato">
+    <div class="container">
+      <div class="contato-header">
+        <h2>Entre em contato</h2>
+        <p>Agende sua avaliacao, tire duvidas e fale direto com a equipe.</p>
+      </div>
+
+      <div class="contato-grid">
+        <div class="contato-info">
+          <h3>Informacoes da clinica</h3>
+          
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Endereço</h4>
+              <p>Rua Vergueiro 3185, sala 64<br>Ao lado do metrô Vila Mariana</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Telefone</h4>
+              <p><a href="tel:+5511953415380">(11) 95341-5380</a></p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>E-mail</h4>
+              <p><a href="mailto:ms.anizzolavo@gmail.com">ms.anizzolavo@gmail.com</a></p>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://www.instagram.com/anizzolavo.jesus?igsh=MXJiaTZ3NTVyZWU5MQ==" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+        
+        <div class="contato-form">
+          <form id="formContato">
+            <input type="text" name="nome" placeholder="Seu nome" required />
+            <input type="email" name="email" placeholder="Seu e-mail" required />
+            <input type="tel" name="telefone" placeholder="Seu telefone" required />
+            <textarea name="mensagem" rows="5" placeholder="Sua mensagem"></textarea>
+            <button type="submit" class="btn-primary">Enviar mensagem</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>Dr. Anizzolavo Jesus</h3>
+          <p>Especializado em cirurgia ortognática e tratamento de ATM.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#especialidades">Especialidades</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Dr. Anizzolavo Jesus. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL LOGIN ADMIN ==================== -->
+  <div class="modal-overlay" id="modalLoginAdmin">
+    <div class="modal-container modal-login">
+      <button class="modal-close" onclick="closeModal('modalLoginAdmin')">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <i class="fas fa-user-md"></i>
+        <h2>Área do Dr. Anizzolavo</h2>
+        <p>Acesso exclusivo &mdash; Cirurgia Bucomaxilofacial</p>
+      </div>
+      
+      <form id="adminLoginForm" class="modal-form">
+        <div class="form-group">
+          <label for="adminUsername">
+            <i class="fas fa-user"></i> Usuário
+          </label>
+          <input type="text" id="adminUsername" required placeholder="Digite seu usuário">
+        </div>
+        
+        <div class="form-group">
+          <label for="adminPassword">
+            <i class="fas fa-lock"></i> Senha
+          </label>
+          <div class="input-password-wrapper">
+            <input type="password" id="adminPassword" required placeholder="Digite sua senha">
+            <button type="button" class="btn-toggle-password" onclick="toggleAdminPassword()" title="Mostrar/ocultar senha">
+              <i class="fas fa-eye" id="adminPasswordEyeIcon"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="error-message" id="adminErrorMessage">
+          <i class="fas fa-exclamation-circle"></i>
+          Usuário ou senha incorretos!
+        </div>
+        
+        <button type="submit" class="btn-modal-primary">
+          <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL ÁREA DO PACIENTE ==================== -->
+  <div class="modal-overlay" id="modalPatientArea">
+    <div class="modal-container modal-patient">
+      <button class="modal-close" onclick="closeModal('modalPatientArea')">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <i class="fas fa-user-circle"></i>
+        <h2>Área do Paciente</h2>
+        <p>Acesse seus documentos e agendamentos</p>
+      </div>
+      
+      <form id="patientLoginForm" class="modal-form">
+        <div class="form-group">
+          <label for="patientCPF">
+            <i class="fas fa-id-card"></i> CPF
+          </label>
+          <input type="text" id="patientCPF" required placeholder="000.000.000-00" maxlength="14">
+        </div>
+        
+        <div class="form-group">
+          <label for="patientPassword">
+            <i class="fas fa-lock"></i> Senha
+          </label>
+          <input type="password" id="patientPassword" required placeholder="Digite sua senha">
+        </div>
+        
+        <div class="error-message" id="patientErrorMessage">
+          <i class="fas fa-exclamation-circle"></i>
+          CPF ou senha incorretos!
+        </div>
+        
+        <button type="submit" class="btn-modal-primary">
+          <i class="fas fa-sign-in-alt"></i> Acessar
+        </button>
+        
+        <div class="modal-footer-links">
+          <a href="#" onclick="alert('Entre em contato com a clínica para recuperar sua senha.')">
+            <i class="fas fa-key"></i> Esqueci minha senha
+          </a>
+          <a href="#contato">
+            <i class="fas fa-user-plus"></i> Primeiro acesso
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== PAINEL ADMIN INTEGRADO ==================== -->
+  <div class="admin-panel-integrated" id="adminPanelIntegrated">
+    <div class="admin-panel-header">
+      <div class="admin-panel-title">
+        <i class="fas fa-cog"></i>
+        <h2>Painel Administrativo</h2>
+      </div>
+      <button class="btn-close-admin" id="btnCloseAdmin">
+        <i class="fas fa-sign-out-alt"></i> Sair do Painel
+      </button>
+    </div>
+    
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="blog">
+        <i class="fas fa-blog"></i> Gerenciar Blog
+      </button>
+      <button class="admin-tab" data-tab="avaliacoes">
+        <i class="fas fa-star"></i> Avaliações <span class="tab-badge" id="tabBadgeAvaliacoes"></span>
+      </button>
+    </div>
+    
+    <!-- TAB: Gerenciar Blog -->
+    <div class="admin-tab-content active" id="tabBlog">
+      <div class="admin-content-grid">
+        <!-- Formulário de Post -->
+        <div class="admin-form-section">
+          <h3 id="adminFormTitle">
+            <i class="fas fa-plus-circle"></i> Novo Post
+          </h3>
+          
+          <div class="success-message" id="adminSuccessMessage">
+            <i class="fas fa-check-circle"></i> Post salvo com sucesso!
+          </div>
+          
+          <form id="adminBlogForm">
+            <input type="hidden" id="adminPostId">
+            
+            <div class="form-group">
+              <label for="adminPostTitle">Título do Post *</label>
+              <input type="text" id="adminPostTitle" required placeholder="Digite o título">
+            </div>
+            
+            <div class="form-group">
+              <label for="adminPostExcerpt">Resumo *</label>
+              <textarea id="adminPostExcerpt" required placeholder="Breve descrição" rows="2"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="adminPostContent">Conteúdo Completo *</label>
+              <textarea id="adminPostContent" required placeholder="Conteúdo do post" rows="6"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="adminPostCategory">Categoria</label>
+              <select id="adminPostCategory">
+                <option value="Cirurgia Ortognática">Cirurgia Ortognática</option>
+                <option value="ATM">Tratamento de ATM</option>
+                <option value="Pacientes Especiais">Pacientes Especiais</option>
+                <option value="Dicas">Dicas e Cuidados</option>
+                <option value="Novidades">Novidades</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Imagem do Post</label>
+              <div class="image-upload-area" id="adminImageUpload">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Clique ou arraste uma imagem</p>
+                <input type="file" id="adminPostImage" accept="image/*" style="display: none;">
+              </div>
+              <img id="adminImagePreview" class="image-preview" alt="Preview" style="display: none;">
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn-admin-primary">
+                <i class="fas fa-upload"></i> Publicar no site
+              </button>
+              <button type="button" class="btn-admin-secondary" id="btnAdminCancel" style="display: none;">
+                <i class="fas fa-times"></i> Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Lista de Posts -->
+        <div class="admin-posts-section">
+          <h3><i class="fas fa-list"></i> Posts Publicados</h3>
+          <div id="adminPostsList"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- TAB: Avaliações -->
+    <div class="admin-tab-content" id="tabAvaliacoes">
+      <h3><i class="fas fa-star"></i> Gerenciar Avaliações</h3>
+      
+      <div class="avaliacoes-admin-container">
+        <!-- Filtros -->
+        <div class="avaliacoes-filters">
+          <button class="filter-btn active" data-filter="pendentes">
+            <i class="fas fa-clock"></i> Pendentes (<span id="countPendentes">0</span>)
+          </button>
+          <button class="filter-btn" data-filter="aprovadas">
+            <i class="fas fa-check"></i> Aprovadas (<span id="countAprovadas">0</span>)
+          </button>
+          <button class="filter-btn" data-filter="reprovadas">
+            <i class="fas fa-times"></i> Reprovadas (<span id="countReprovadas">0</span>)
+          </button>
+          <button class="filter-btn" data-filter="todas">
+            <i class="fas fa-list"></i> Todas (<span id="countTodas">0</span>)
+          </button>
+        </div>
+        
+        <!-- Lista de Avaliações -->
+        <div id="listaAvaliacoes" class="avaliacoes-lista">
+          <!-- Avaliações serão carregadas aqui -->
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <script src="blog.js"></script>
+  <script src="avaliacoes.js"></script>
+  <script src="admin-integrated-fixed.js"></script>
+  <script src="script.js"></script>
+  <script src="modern-effects.js"></script>
+</body>
+</html>

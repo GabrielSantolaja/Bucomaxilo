@@ -1,0 +1,1493 @@
+/* ==================== RESPONSIVIDADE COMPLETA 100% ==================== */
+
+/* Prevenir overflow horizontal em todos os dispositivos */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Garantir que nenhum elemento ultrapasse a largura da tela */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== TABLETS (iPads, tablets Android) ==================== */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 30px;
+  }
+
+  /* Header */
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 85vh;
+    padding: 120px 0 60px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-image-right {
+    height: 500px;
+  }
+
+  /* Sobre */
+  .sobre-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sobre-image {
+    order: -1;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Especialidades */
+  .especialidades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  /* Antes e Depois */
+  .antes-depois-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Blog */
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Depoimentos */
+  .depoimentos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contato */
+  .contato-wrapper,
+  .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contato-info {
+    order: -1;
+  }
+
+  /* Redes Sociais */
+  .social-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .social-actions {
+    justify-content: center;
+  }
+
+  .social-highlights {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .phone-mockup {
+    margin: 0 auto;
+  }
+
+  .quiz-step-card,
+  .quiz-result {
+    max-width: 100%;
+  }
+}
+
+/* ==================== TABLETS PEQUENOS ==================== */
+@media (max-width: 820px) {
+  .container {
+    padding: 0 25px;
+  }
+
+  /* Typography */
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* Especialidades */
+  .especialidade-card {
+    padding: 25px;
+  }
+
+  .card-icon {
+    width: 65px;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+
+  /* Admin Panel */
+  .admin-panel-integrated {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .admin-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .admin-tab {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 140px;
+  }
+
+  .avaliacoes-admin-container {
+    padding: 10px;
+  }
+
+  .avaliacoes-filters {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* ==================== SMARTPHONES (iPhone, Android) ==================== */
+@media (max-width: 768px) {
+  /* Container */
+  .container {
+    padding: 0 20px;
+  }
+
+  /* Typography */
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  /* Header/Navbar */
+  .navbar {
+    padding: 6px 10px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    margin-left: 0 !important;
+    max-width: none;
+    align-items: center;
+  }
+
+  .logo-text-group {
+    width: auto;
+    left: auto;
+    transform: none;
+    position: relative;
+    margin-left: 6px;
+  }
+
+  .logo h1 {
+    font-size: 1rem !important;
+    letter-spacing: 1.1px !important;
+    line-height: 1.1;
+  }
+
+  .logo-dr-icon {
+    width: 74px !important;
+    height: 74px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    transform: scale(1.14);
+    transform-origin: left center;
+  }
+
+  .logo-subtitle {
+    font-size: 0.5rem !important;
+    letter-spacing: 1.4px !important;
+    white-space: nowrap;
+  }
+
+  .logo-tooth {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    position: fixed;
+    left: -100%;
+    top: 64px;
+    flex-direction: column;
+    background-color: rgba(8, 26, 51, 0.98);
+    backdrop-filter: blur(12px);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 20px 0;
+    z-index: 999;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+
+  .nav-links.show {
+    left: 0;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  .nav-links a {
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    display: block;
+  }
+
+  /* Ocultar item de admin no menu mobile (evita barra grande) */
+  .mobile-only {
+    display: none !important;
+  }
+
+  .btn-menu {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding: 100px 0 50px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 30px;
+  }
+
+  .hero-title-main {
+    font-size: 2.2rem;
+  }
+
+  .hero-image-right {
+    height: 380px;
+  }
+
+  /* Redes Sociais */
+  .social-section {
+    padding: 70px 0;
+  }
+
+  .social-actions {
+    flex-direction: column;
+  }
+
+  .social-handle {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .social-highlights {
+    text-align: center;
+  }
+
+  .social-highlights li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-mockup {
+    width: 260px;
+    height: 520px;
+  }
+
+  .phone-screen {
+    padding: 22px 16px 16px;
+  }
+
+  .quiz-apneia {
+    padding: 70px 0;
+  }
+
+  .quiz-question {
+    padding: 16px;
+  }
+
+  .quiz-step-card {
+    padding: 20px;
+  }
+
+  .quiz-nav {
+    flex-direction: column;
+  }
+
+  .quiz-result-actions {
+    flex-direction: column;
+  }
+
+  .quiz-start-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Sobre */
+  .sobre {
+    padding: 50px 0;
+  }
+
+  .sobre-text {
+    text-align: center;
+  }
+
+  .sobre-image img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Especialidades */
+  .especialidades {
+    padding: 50px 0;
+  }
+
+  .especialidades-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .especialidade-card {
+    padding: 25px 20px;
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+  }
+
+  /* Antes e Depois */
+  .antes-depois {
+    padding: 50px 0;
+  }
+
+  .antes-depois-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .antes-depois-card {
+    max-width: 100%;
+  }
+
+  .casos-actions {
+    flex-direction: column;
+  }
+
+  .caso-comparison-media {
+    grid-template-columns: 1fr;
+  }
+
+  .caso-comparison-media img {
+    height: 220px;
+  }
+
+  /* Blog */
+  .blog {
+    padding: 50px 0;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .blog-card {
+    max-width: 100%;
+  }
+
+  /* Depoimentos */
+  .depoimentos {
+    padding: 50px 0;
+  }
+
+  .depoimentos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Contato */
+  .contato {
+    padding: 50px 0;
+  }
+
+  .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .footer-section h3 {
+    margin-top: 0;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+  }
+
+  /* WhatsApp Button - Mobile */
+  .whatsapp-float {
+    width: 55px;
+    height: 55px;
+    bottom: 20px;
+    left: 20px;
+    right: auto;
+    font-size: 28px;
+    z-index: 9996;
+  }
+
+  /* Menu Mobile Button - Manter no header */
+  .btn-menu {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: relative !important;
+  }
+
+  /* Manter icone de admin no header e ocultar dropdown até clique */
+  .header-actions .btn-admin-menu {
+    display: flex !important;
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .admin-dropdown {
+    display: none !important;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    max-width: 400px;
+    padding: 25px;
+    margin: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* Avaliacoes Modal */
+  .modal-form {
+    padding: 15px;
+  }
+
+  .modal-form .form-group {
+    margin-bottom: 12px;
+  }
+
+  .modal-form input,
+  .modal-form textarea,
+  .modal-form select {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .modal-body {
+    padding: 20px 0;
+  }
+
+  .form-group input {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  .btn-login {
+    padding: 12px;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+  }
+
+  /* Admin Panel - MOBILE COMPLETO */
+  .admin-panel-integrated {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    padding: 0;
+    overflow-y: auto;
+    margin: 0;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .admin-panel-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3a5f, #0a2540);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .admin-panel-title h2 {
+    font-size: 1.3rem;
+    margin: 0;
+    color: white;
+  }
+
+  .btn-close-admin {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-user-info {
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .btn-logout {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-logout:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Admin Tabs - Mobile */
+  .admin-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 12px 15px;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    position: sticky;
+    top: 80px;
+    z-index: 99;
+  }
+
+  .admin-tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .admin-tabs::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+  }
+
+  .admin-tab {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    min-width: 110px;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .admin-tab i {
+    font-size: 0.95rem;
+  }
+
+  /* Admin Content */
+  .admin-tab-content {
+    padding: 15px;
+  }
+
+  /* Blog Form - Mobile */
+  .admin-content-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .admin-form-section,
+  .admin-posts-section {
+    padding: 15px;
+  }
+
+  .image-upload-area {
+    padding: 30px 15px;
+    min-height: 140px;
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .image-upload-area:active {
+    background: rgba(52, 152, 219, 0.05);
+  }
+
+  .upload-icon {
+    font-size: 2.5rem;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+
+  .upload-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-submit-blog {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+  /* Posts List - Mobile */
+  .posts-list {
+    gap: 15px;
+  }
+
+  .post-item-admin {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .post-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .post-title {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .post-meta {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .post-date,
+  .post-author,
+  .post-category {
+    font-size: 0.8rem;
+  }
+
+  .post-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .btn-edit-post,
+  .btn-delete-post {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  /* Antes/Depois Admin - Mobile */
+  .antes-depois-form {
+    padding: 0;
+  }
+
+  .image-upload-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .image-upload-box {
+    width: 100%;
+  }
+
+  .image-upload-box h4 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  /* Galeria Admin - Mobile */
+  .galeria-admin {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .galeria-item-admin {
+    border-radius: 8px;
+  }
+
+  .btn-delete-galeria {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  /* Avaliações Admin - Mobile */
+  .avaliacoes-filters {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .filter-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .avaliacoes-list {
+    gap: 15px;
+  }
+
+  .avaliacao-item {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .avaliacao-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .avaliacao-nome {
+    font-size: 1rem;
+  }
+
+  .avaliacao-status {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+
+  .avaliacao-rating-admin {
+    margin-bottom: 10px;
+  }
+
+  .avaliacao-texto-admin {
+    font-size: 0.9rem;
+    padding: 12px;
+    line-height: 1.5;
+  }
+
+  .avaliacao-actions {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .btn-aprovar,
+  .btn-reprovar,
+  .btn-excluir-avaliacao {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.85rem;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
+  .btn-excluir-avaliacao {
+    margin-left: 0;
+    order: 3;
+  }
+
+  /* Configurações - Mobile */
+  .config-section {
+    padding: 15px;
+  }
+
+  /* Empty States */
+  .empty-posts,
+  .empty-galeria,
+  .empty-avaliacoes {
+    padding: 40px 15px;
+    text-align: center;
+  }
+
+  .empty-posts i,
+  .empty-galeria i,
+  .empty-avaliacoes i {
+    font-size: 3rem;
+    opacity: 0.3;
+    margin-bottom: 15px;
+  }
+
+  .empty-posts p,
+  .empty-galeria p,
+  .empty-avaliacoes p {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+
+  /* Mensagens de Sucesso/Erro - Mobile */
+  .success-message,
+  .error-message {
+    font-size: 0.9rem;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+}
+
+/* ==================== SMARTPHONES PEQUENOS (iPhone SE, etc) ==================== */
+@media (max-width: 480px) {
+  /* Typography */
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  /* Container */
+  .container {
+    padding: 0 15px;
+  }
+
+  /* Header */
+  .navbar {
+    padding: 4px 8px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    margin-left: 0 !important;
+    max-width: none;
+  }
+
+  .logo-text-group {
+    width: auto;
+    margin-left: 5px;
+  }
+
+  .logo h1 {
+    font-size: 0.9rem !important;
+    letter-spacing: 0.8px !important;
+  }
+
+  .logo-dr-icon {
+    width: 62px !important;
+    height: 62px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    transform: scale(1.12);
+    transform-origin: left center;
+  }
+
+  .logo-subtitle {
+    font-size: 0.45rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  .header-actions .btn-admin-menu {
+    width: 34px;
+    height: 34px;
+    font-size: 0.92rem;
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+
+  /* Cards */
+  .especialidade-card,
+  .blog-card,
+  .depoimento-card {
+    padding: 20px 15px;
+  }
+
+  .card-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+
+  /* Admin Panel */
+  .admin-panel-integrated {
+    padding: 12px;
+  }
+
+  .admin-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .admin-tab {
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .admin-tab i {
+    font-size: 0.9rem;
+  }
+
+  .admin-content-section {
+    padding: 12px;
+  }
+
+  /* Forms */
+  .form-group-admin input,
+  .form-group-admin textarea,
+  .form-group-admin select {
+    font-size: 0.85rem;
+    padding: 9px;
+  }
+
+  .btn-submit-blog {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  /* Galeria */
+  .galeria-admin {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modal */
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==================== LANDSCAPE MODE (Celulares deitados) ==================== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 80px 0 40px;
+  }
+
+  .admin-panel-integrated {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* ==================== TOUCH OPTIMIZATIONS ==================== */
+@media (hover: none) and (pointer: coarse) {
+  /* Aumentar áreas de toque */
+  .admin-tab {
+    min-height: 44px;
+  }
+
+  .btn-edit-post,
+  .btn-delete-post,
+  .btn-aprovar,
+  .btn-reprovar,
+  .btn-excluir-avaliacao {
+    min-height: 44px;
+  }
+
+  .filter-btn {
+    min-height: 44px;
+  }
+
+  /* Remover hover effects em touch */
+  .especialidade-card:hover,
+  .blog-card:hover,
+  .depoimento-card:hover {
+    transform: none;
+  }
+
+  .stat-card:hover {
+    transform: none !important;
+  }
+
+  /* Desabilitar tilt effect */
+  .especialidade-card,
+  .stat-card {
+    transform: none !important;
+  }
+}
+
+/* ==================== ACESSIBILIDADE ==================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .particles-canvas {
+    display: none;
+  }
+
+  .shape {
+    animation: none !important;
+  }
+
+  .floating-badges {
+    display: none;
+  }
+}
+
+/* ==================== MODO ESCURO (Auto-detect) ==================== */
+@media (prefers-color-scheme: dark) {
+  /* Futura implementação de dark mode */
+}
+/* ==================== CELULARES PEQUENOS (iPhone SE, Galaxy S8, etc) ==================== */
+@media (max-width: 375px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Typography ajustada */
+  .section-title {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-title-main {
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 90px 0 40px;
+  }
+
+  .hero-image-right {
+    height: 320px;
+  }
+
+  .success-badge {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .success-avatars img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-cta {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* Redes Sociais */
+  .phone-mockup {
+    width: 240px;
+    height: 480px;
+  }
+
+  .ig-stats strong {
+    font-size: 0.85rem;
+  }
+
+  .ig-bio {
+    font-size: 0.72rem;
+  }
+
+  /* Especialidades */
+  .especialidade-card {
+    padding: 20px 16px;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+
+  .especialidade-card h3 {
+    font-size: 1rem;
+  }
+
+  /* Casos */
+  .caso-card h3 {
+    font-size: 0.9rem;
+    padding: 14px 12px;
+  }
+
+  /* Blog */
+  .blog-card h3 {
+    font-size: 1.1rem;
+  }
+
+  /* FAQ */
+  .faq-item {
+    padding: 20px;
+  }
+
+  .faq-item h3 {
+    font-size: 1rem;
+  }
+
+  /* Vídeo Carousel */
+  .carousel-track {
+    grid-auto-columns: minmax(280px, 1fr);
+    gap: 16px;
+  }
+
+  .video-card {
+    padding: 14px;
+  }
+
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  /* Contato */
+  .contato-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .contato-info,
+  .contato-form {
+    padding: 22px 18px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 50px 0 16px;
+  }
+
+  .footer-col h3,
+  .footer-col h4 {
+    font-size: 1.1rem;
+  }
+
+  /* Modal */
+  .modal-container {
+    max-width: 340px;
+  }
+
+  .modal-header {
+    padding: 30px 20px 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-form {
+    padding: 20px;
+  }
+
+  .rating-stars {
+    font-size: 2rem;
+    gap: 8px;
+  }
+
+  /* WhatsApp Float */
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 16px;
+    right: 16px;
+    font-size: 24px;
+  }
+}
+
+/* ==================== OTIMIZAÇÕES PARA TODOS OS CELULARES ==================== */
+@media (max-width: 767px) {
+  /* Evitar texto muito pequeno */
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Garantir que imagens não quebrem layout */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Evitar zoom indesejado em inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Melhorar cliques em links e botões */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary):not(.btn-cta) {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  /* CTA Final */
+  .cta-final {
+    padding: 80px 0;
+  }
+
+  .cta-final h2 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .cta-final p {
+    font-size: 1rem;
+  }
+
+  /* Antes e Depois */
+  .antes-depois {
+    padding: 60px 0;
+  }
+
+  .comparison-image {
+    flex-direction: column;
+  }
+
+  .image-before,
+  .image-after {
+    height: 280px;
+  }
+
+  /* Depoimentos */
+  .depoimentos {
+    padding: 60px 0;
+  }
+
+  .depoimentos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Blog */
+  .blog {
+    padding: 60px 0;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  /* Casos Pacientes */
+  .casos-pacientes {
+    padding: 60px 0;
+  }
+
+  .casos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* FAQ */
+  .faq-section {
+    padding: 60px 0;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Vídeo Carousel */
+  .video-carousel {
+    padding: 60px 0;
+  }
+
+  .carousel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .carousel-controls {
+    align-self: flex-end;
+  }
+
+  /* Lista de features */
+  .features-list {
+    padding-left: 0;
+  }
+
+  .features-list li {
+    font-size: 0.95rem;
+  }
+
+  /* Info items */
+  .info-item {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .info-item i {
+    flex-shrink: 0;
+  }
+
+  /* Social links */
+  .social-links a {
+    flex-shrink: 0;
+  }
+}
+
+/* ==================== AJUSTES ESPECÍFICOS PARA IPHONE (Safe Area) ==================== */
+@supports (padding: max(0px)) {
+  .header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .whatsapp-float {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
+  }
+
+  .footer {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ==================== AJUSTES PARA LANDSCAPE EM CELULARES ==================== */
+@media (max-width: 896px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 60px 0 40px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .hero-image-right {
+    height: 300px;
+  }
+
+  .phone-mockup {
+    display: none;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== PERFORMANCE E OTIMIZAÇÕES ==================== */
+@media (max-width: 767px) {
+  /* Reduzir animações pesadas em mobile */
+  * {
+    animation-duration: 0.3s !important;
+  }
+
+  /* Otimizar sombras */
+  .card,
+  .blog-card,
+  .especialidade-card,
+  .caso-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Simplificar gradientes complexos */
+  .hero::before,
+  .cta-final::before {
+    display: none;
+  }
+}
