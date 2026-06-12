@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -7,85 +7,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=yes" />
+  <meta name="facebook-domain-verification" content="hszc4x71150mv9dgst0ogldw0qhd5z" />
   <title>Dr. Anizzolavo Jesus - Cirurgia Ortognática e ATM</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A6%B7%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="style.css?v=20260324-1" />
-  <link rel="stylesheet" href="modern-effects.css?v=20260324-1" />
-  <link rel="stylesheet" href="responsive-complete.css?v=20260324-1" />
+  <link rel="stylesheet" href="css/components/utilities.css?v=20260610-2352" />
+  <link rel="stylesheet" href="style.css?v=20260610-2352" />
+  <link rel="stylesheet" href="css/admin-overrides.css?v=20260610-2352" />
+  <link rel="stylesheet" href="modern-effects.css?v=20260610-2352" />
+  <link rel="stylesheet" href="responsive-complete.css?v=20260610-2352" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
-  <style>
-    .logo h1 {
-      font-family: 'Cinzel', serif !important;
-      color: #0F0F59 !important;
-      -webkit-text-fill-color: #0F0F59 !important;
-    }
-
-    .logo h1::after {
-      background: linear-gradient(90deg, #0F0F59, transparent) !important;
-    }
-
-    .logo-subtitle {
-      color: #0F0F59 !important;
-    }
-  </style>
-  
-  <style>
-    /* Estilos adicionais para garantir funcionamento do admin */
-    .admin-panel-integrated * {
-      box-sizing: border-box;
-    }
-    
-    .admin-panel-integrated textarea {
-      font-family: inherit;
-      resize: vertical;
-    }
-    
-    .admin-panel-integrated .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #2c3e50;
-      font-weight: 600;
-    }
-    
-    .admin-panel-integrated .form-group input,
-    .admin-panel-integrated .form-group textarea,
-    .admin-panel-integrated .form-group select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: border-color 0.3s;
-    }
-    
-    .admin-panel-integrated .form-group input:focus,
-    .admin-panel-integrated .form-group textarea:focus,
-    .admin-panel-integrated .form-group select:focus {
-      outline: none;
-      border-color: #3498db;
-    }
-    
-    .modal-form input::placeholder,
-    .modal-form textarea::placeholder,
-    .admin-panel-integrated input::placeholder,
-    .admin-panel-integrated textarea::placeholder {
-      color: #95a5a6;
-    }
-    
-    /* Fix para o painel não sobrepor incorretamente */
-    body.admin-open {
-      overflow: hidden;
-    }
-    
-    /* Garantir que botões tenham cursor pointer */
-    button, .btn-admin-menu, .admin-dropdown-item {
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <!-- Botão WhatsApp Flutuante -->
@@ -104,12 +37,12 @@
           <p class="logo-subtitle">CIRURGIA BUCOMAXILOFACIAL</p>
         </div>
       </div>
-      <ul class="nav-links" id="nav-links">
+      <ul class="nav-links js-nav-links" id="nav-links">
         <li><a href="#inicio">Início</a></li>
         <li><a href="#casos">Casos</a></li>
         <li><a href="#procedimento">Procedimento</a></li>
         <li><a href="#sobre">Sobre</a></li>
-        <li class="mobile-only"><a href="#" id="btnAdminMenuMobile"><i class="fas fa-user-lock"></i> Entrar no Admin</a></li>
+        <li class="mobile-only"><a href="#" class="js-admin-menu-mobile" id="btnAdminMenuMobile"><i class="fas fa-user-lock"></i> Entrar no Admin</a></li>
       </ul>
       <div class="header-actions">
         <!-- Botão Menu 3 Pontos -->
@@ -123,7 +56,7 @@
 
   <!-- Dropdown Menu Admin -->
   <div class="admin-dropdown" id="adminDropdown">
-    <div class="admin-dropdown-item" id="btnLogin">
+    <div class="admin-dropdown-item js-admin-login-trigger" id="btnLogin">
       <i class="fas fa-user-lock"></i>
       <span>Área do Admin</span>
     </div>
@@ -210,7 +143,7 @@
       <div class="antes-depois-slider">
         <div class="slider-item">
           <div class="before-after-video-card">
-            <video controls autoplay muted loop playsinline preload="auto" class="before-after-video" id="beforeAfterVideoMain">
+            <video controls autoplay muted loop playsinline preload="auto" class="before-after-video js-before-after-video" id="beforeAfterVideoMain">
               <source src="imagens/WhatsApp%20Video%202026-03-11%20at%2017.58.18.mp4#t=0.1" type="video/mp4">
               Seu navegador não suporta reprodução de vídeo.
             </video>
@@ -355,27 +288,27 @@
         <h2 class="section-title">Quer descobrir se tem apneia do sono? Faça o quiz.</h2>
       </div>
 
-      <div id="apneaQuizIntro" class="quiz-intro">
-        <button type="button" id="apneaQuizStart" class="btn-primary quiz-start-btn">Fazer quiz</button>
+      <div id="apneaQuizIntro" class="quiz-intro js-apnea-quiz-intro">
+        <button type="button" id="apneaQuizStart" class="btn-primary quiz-start-btn js-apnea-quiz-start">Fazer quiz</button>
       </div>
 
-      <div id="apneaQuizStep" class="quiz-step-card" style="display: none;">
-        <div class="quiz-progress" id="apneaQuizProgress">Pergunta 1 de 10</div>
-        <h3 id="apneaQuestionText"></h3>
-        <div class="quiz-options" id="apneaOptions"></div>
-        <p id="apneaQuizError" class="quiz-error" style="display: none;">Selecione uma resposta para continuar.</p>
+      <div id="apneaQuizStep" class="quiz-step-card is-hidden js-apnea-quiz-step">
+        <div class="quiz-progress js-apnea-quiz-progress" id="apneaQuizProgress">Pergunta 1 de 10</div>
+        <h3 class="js-apnea-question-text" id="apneaQuestionText"></h3>
+        <div class="quiz-options js-apnea-options" id="apneaOptions"></div>
+        <p id="apneaQuizError" class="quiz-error is-hidden js-apnea-quiz-error">Selecione uma resposta para continuar.</p>
 
         <div class="quiz-nav">
-          <button type="button" id="apneaPrevBtn" class="btn-secondary">Voltar</button>
+          <button type="button" id="apneaPrevBtn" class="btn-secondary js-apnea-prev-btn">Voltar</button>
         </div>
       </div>
 
-      <div id="apneaQuizResult" class="quiz-result" style="display: none;">
-        <h3>Seu resultado estimado: <span id="apneaScore">0%</span></h3>
-        <p id="apneaRiskText"></p>
+      <div id="apneaQuizResult" class="quiz-result is-hidden js-apnea-quiz-result">
+        <h3>Seu resultado estimado: <span id="apneaScore" class="js-apnea-score">0%</span></h3>
+        <p id="apneaRiskText" class="js-apnea-risk-text"></p>
         <div class="quiz-result-actions">
-          <a id="apneaWhatsappBtn" class="btn-primary" target="_blank" rel="noopener">Fazer avaliação</a>
-          <button type="button" id="apneaRetryBtn" class="btn-primary">Fazer novamente</button>
+          <a id="apneaWhatsappBtn" class="btn-primary js-apnea-whatsapp-btn" target="_blank" rel="noopener">Fazer avaliação</a>
+          <button type="button" id="apneaRetryBtn" class="btn-primary js-apnea-retry-btn">Fazer novamente</button>
         </div>
       </div>
     </div>
@@ -404,7 +337,7 @@
   <!-- Modal Formulário de Avaliação -->
   <div class="modal-overlay" id="modalAvaliacao">
     <div class="modal-container modal-avaliacao">
-      <button class="modal-close" onclick="closeModal('modalAvaliacao')">
+      <button class="modal-close" data-close-modal="modalAvaliacao" type="button">
         <i class="fas fa-times"></i>
       </button>
       
@@ -506,16 +439,16 @@
       <div class="carousel-header">
         <h2 class="section-title">Esclareça suas dúvidas com os vídeos abaixo e entre em contato conosco</h2>
         <div class="carousel-controls">
-          <button type="button" class="carousel-btn" id="videoPrev" aria-label="Vídeo anterior">
+          <button type="button" class="carousel-btn js-video-prev" id="videoPrev" aria-label="Vídeo anterior">
             <i class="fas fa-chevron-left"></i>
           </button>
-          <button type="button" class="carousel-btn" id="videoNext" aria-label="Próximo vídeo">
+          <button type="button" class="carousel-btn js-video-next" id="videoNext" aria-label="Próximo vídeo">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
       </div>
 
-      <div class="carousel-track" id="videoCarousel">
+      <div class="carousel-track js-video-carousel" id="videoCarousel">
         <div class="video-card">
           <div class="video-frame">
             <iframe src="https://www.youtube.com/embed/EQqOWVJ1Wi8" title="Vídeo do Dr. Anizzolavo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -593,7 +526,7 @@
         </div>
         
         <div class="contato-form">
-          <form id="formContato">
+          <form id="formContato" class="js-contact-form">
             <input type="text" name="nome" placeholder="Seu nome" required />
             <input type="email" name="email" placeholder="Seu e-mail" required />
             <input type="tel" name="telefone" placeholder="Seu telefone" required />
@@ -634,7 +567,7 @@
   <!-- ==================== MODAL LOGIN ADMIN ==================== -->
   <div class="modal-overlay" id="modalLoginAdmin">
     <div class="modal-container modal-login">
-      <button class="modal-close" onclick="closeModal('modalLoginAdmin')">
+      <button class="modal-close" data-close-modal="modalLoginAdmin" type="button">
         <i class="fas fa-times"></i>
       </button>
       
@@ -658,7 +591,7 @@
           </label>
           <div class="input-password-wrapper">
             <input type="password" id="adminPassword" required placeholder="Digite sua senha">
-            <button type="button" class="btn-toggle-password" onclick="toggleAdminPassword()" title="Mostrar/ocultar senha">
+            <button type="button" class="btn-toggle-password js-admin-toggle-password" id="adminTogglePassword" title="Mostrar/ocultar senha">
               <i class="fas fa-eye" id="adminPasswordEyeIcon"></i>
             </button>
           </div>
@@ -679,7 +612,7 @@
   <!-- ==================== MODAL ÁREA DO PACIENTE ==================== -->
   <div class="modal-overlay" id="modalPatientArea">
     <div class="modal-container modal-patient">
-      <button class="modal-close" onclick="closeModal('modalPatientArea')">
+      <button class="modal-close" data-close-modal="modalPatientArea" type="button">
         <i class="fas fa-times"></i>
       </button>
       
@@ -714,7 +647,7 @@
         </button>
         
         <div class="modal-footer-links">
-          <a href="#" onclick="alert('Entre em contato com a clínica para recuperar sua senha.')">
+          <a href="#" class="js-patient-forgot-password" id="patientForgotPasswordLink">
             <i class="fas fa-key"></i> Esqueci minha senha
           </a>
           <a href="#contato">
@@ -793,16 +726,16 @@
               <div class="image-upload-area" id="adminImageUpload">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <p>Clique ou arraste uma imagem</p>
-                <input type="file" id="adminPostImage" accept="image/*" style="display: none;">
+                <input type="file" id="adminPostImage" class="is-hidden" accept="image/*">
               </div>
-              <img id="adminImagePreview" class="image-preview" alt="Preview" style="display: none;">
+              <img id="adminImagePreview" class="image-preview is-hidden" alt="Preview">
             </div>
             
             <div class="form-actions">
               <button type="submit" class="btn-admin-primary">
                 <i class="fas fa-upload"></i> Publicar no site
               </button>
-              <button type="button" class="btn-admin-secondary" id="btnAdminCancel" style="display: none;">
+              <button type="button" class="btn-admin-secondary is-hidden" id="btnAdminCancel">
                 <i class="fas fa-times"></i> Cancelar
               </button>
             </div>
@@ -847,10 +780,14 @@
     
   </div>
 
-  <script src="blog.js"></script>
-  <script src="avaliacoes.js"></script>
-  <script src="admin-integrated-fixed.js"></script>
-  <script src="script.js"></script>
-  <script src="modern-effects.js"></script>
+  <script src="blog.js?v=20260610-2352"></script>
+  <script src="avaliacoes.js?v=20260610-2352"></script>
+  <script src="admin-integrated-fixed.js?v=20260610-2352"></script>
+  <script src="js/contact-whatsapp.js?v=20260610-2352"></script>
+  <script src="js/quiz-apneia.js?v=20260610-2352"></script>
+  <script src="js/video-carousel.js?v=20260610-2352"></script>
+  <script src="script.js?v=20260610-2352"></script>
+  <script src="modern-effects.js?v=20260610-2352"></script>
 </body>
 </html>
+

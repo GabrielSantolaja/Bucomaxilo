@@ -1,6 +1,10 @@
 // ==================== MENU MOBILE ====================
-const btnMenu = document.getElementById('btn-menu');
-const navLinks = document.getElementById('nav-links');
+const getHookElement = (hookClass, fallbackId) => {
+  return document.querySelector(`.${hookClass}`) || document.getElementById(fallbackId);
+};
+
+const btnMenu = getHookElement('js-btn-menu', 'btn-menu');
+const navLinks = getHookElement('js-nav-links', 'nav-links');
 
 if (btnMenu && navLinks) {
   // Toggle menu mobile
@@ -60,6 +64,10 @@ if (btnMenu && navLinks) {
 function toggleAdminPassword() {
   const input = document.getElementById('adminPassword');
   const icon = document.getElementById('adminPasswordEyeIcon');
+  if (!input || !icon) {
+    return;
+  }
+
   if (input.type === 'password') {
     input.type = 'text';
     icon.classList.replace('fa-eye', 'fa-eye-slash');
@@ -69,10 +77,34 @@ function toggleAdminPassword() {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-close-modal]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const modalId = button.getAttribute('data-close-modal');
+      if (modalId && typeof window.closeModal === 'function') {
+        window.closeModal(modalId);
+      }
+    });
+  });
+
+  const adminTogglePassword = getHookElement('js-admin-toggle-password', 'adminTogglePassword');
+  if (adminTogglePassword) {
+    adminTogglePassword.addEventListener('click', toggleAdminPassword);
+  }
+
+  const patientForgotPasswordLink = getHookElement('js-patient-forgot-password', 'patientForgotPasswordLink');
+  if (patientForgotPasswordLink) {
+    patientForgotPasswordLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert('Entre em contato com a clínica para recuperar sua senha.');
+    });
+  }
+});
+
 // ==================== BOTÃO ADMIN NO MENU MOBILE ====================
 document.addEventListener('DOMContentLoaded', () => {
-  const btnAdminMenuMobile = document.getElementById('btnAdminMenuMobile');
-  const btnLogin = document.getElementById('btnLogin');
+  const btnAdminMenuMobile = getHookElement('js-admin-menu-mobile', 'btnAdminMenuMobile');
+  const btnLogin = getHookElement('js-admin-login-trigger', 'btnLogin');
   
   if (btnAdminMenuMobile && btnLogin) {
     btnAdminMenuMobile.addEventListener('click', (e) => {
@@ -141,89 +173,15 @@ document.querySelectorAll('.especialidade-card, .blog-card, .caso-card, .depoime
   observer.observe(el);
 });
 
-const WHATSAPP_NUMBER = '5511953415380';
-const WHATSAPP_NOME_STORAGE_KEY = 'nomePacienteWhatsapp';
-
-function salvarNomePaciente(nome) {
-  const nomeLimpo = String(nome || '').trim();
-  if (!nomeLimpo) return;
-  localStorage.setItem(WHATSAPP_NOME_STORAGE_KEY, nomeLimpo);
-}
-
-function obterNomePaciente({ permitirPrompt = true } = {}) {
-  const nomeSalvo = (localStorage.getItem(WHATSAPP_NOME_STORAGE_KEY) || '').trim();
-  if (nomeSalvo) {
-    return nomeSalvo;
-  }
-
-  if (!permitirPrompt) {
-    return '';
-  }
-
-  const nomeDigitado = prompt('Para iniciar o contato, informe seu nome:');
-  const nomeLimpo = String(nomeDigitado || '').trim();
-  if (!nomeLimpo) {
-    return '';
-  }
-
-  salvarNomePaciente(nomeLimpo);
-  return nomeLimpo;
-}
-
-function montarMensagemWhatsapp(nomePaciente, complemento = '') {
-  const abertura = `Olá Dr. Anizzolavo, me chamo ${nomePaciente} e gostaria de agendar uma consulta.`;
-  const complementoLimpo = String(complemento || '').trim();
-  return complementoLimpo ? `${abertura}\n\n${complementoLimpo}` : abertura;
-}
-
-function abrirWhatsappContato(complemento = '', nomeInformado = '') {
-  const nomePaciente = String(nomeInformado || '').trim() || obterNomePaciente();
-  if (!nomePaciente) {
-    return false;
-  }
-
-  salvarNomePaciente(nomePaciente);
-  const mensagem = montarMensagemWhatsapp(nomePaciente, complemento);
-  const mensagemCodificada = encodeURIComponent(mensagem);
-  window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${mensagemCodificada}`, '_blank');
-  return true;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const linksContatoWhatsapp = document.querySelectorAll(`a[href*="api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}"]`);
-
-  linksContatoWhatsapp.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      abrirWhatsappContato();
-    });
-  });
-});
-
-// ==================== FORMULÁRIO DE CONTATO ====================
-const formContato = document.getElementById('formContato');
-
-if (formContato) {
-  formContato.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Pegar valores do formulário
-    const nome = formContato.querySelector('[name="nome"]').value;
-
-    salvarNomePaciente(nome);
-    abrirWhatsappContato('', nome);
-
-    // Limpar formulário
-    formContato.reset();
-
-    // Mensagem de sucesso
-    alert('Mensagem enviada! Você será redirecionado para o WhatsApp.');
-  });
-}
-
 // ==================== NEWSLETTER ====================
 const newsletterForm = document.querySelector('.newsletter-form');
 
+const getHookElement = (hookClass, fallbackId) => {
+  return document.querySelector(`.${hookClass}`) || document.getElementById(fallbackId);
+};
+
+const btnMenu = getHookElement('js-btn-menu', 'btn-menu');
+const navLinks = getHookElement('js-nav-links', 'nav-links');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -376,239 +334,3 @@ if (telefoneInput) {
 }
 
 console.log('Site carregado com sucesso! 🚀');
-
-// ==================== CARROSSEL DE VIDEOS ====================
-document.addEventListener('DOMContentLoaded', () => {
-  const videoCarousel = document.getElementById('videoCarousel');
-  const videoPrev = document.getElementById('videoPrev');
-  const videoNext = document.getElementById('videoNext');
-
-  if (videoCarousel && videoPrev && videoNext) {
-    const scrollAmount = () => {
-      const card = videoCarousel.querySelector('.video-card');
-      return card ? card.offsetWidth + 25 : 325;
-    };
-
-    const scrollPrev = () => {
-      videoCarousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-    };
-
-    const scrollNext = () => {
-      videoCarousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-    };
-
-    videoPrev.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollPrev();
-    });
-
-    videoNext.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollNext();
-    });
-
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-
-    videoCarousel.addEventListener('touchstart', (event) => {
-      if (!event.touches || event.touches.length === 0) return;
-      touchStartX = event.touches[0].clientX;
-      touchStartY = event.touches[0].clientY;
-    }, { passive: true });
-
-    videoCarousel.addEventListener('touchend', (event) => {
-      if (!event.changedTouches || event.changedTouches.length === 0) return;
-      touchEndX = event.changedTouches[0].clientX;
-      touchEndY = event.changedTouches[0].clientY;
-
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
-      const minSwipeDistance = 50;
-
-      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-        if (deltaX > 0) {
-          scrollPrev();
-        } else {
-          scrollNext();
-        }
-      }
-    }, { passive: true });
-  }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const apneaQuizStart = document.getElementById('apneaQuizStart');
-  const apneaQuizIntro = document.getElementById('apneaQuizIntro');
-  const apneaQuizStep = document.getElementById('apneaQuizStep');
-  const apneaQuizResult = document.getElementById('apneaQuizResult');
-  const apneaQuestionText = document.getElementById('apneaQuestionText');
-  const apneaOptions = document.getElementById('apneaOptions');
-  const apneaQuizProgress = document.getElementById('apneaQuizProgress');
-  const apneaQuizError = document.getElementById('apneaQuizError');
-  const apneaPrevBtn = document.getElementById('apneaPrevBtn');
-  const apneaRetryBtn = document.getElementById('apneaRetryBtn');
-  const apneaScore = document.getElementById('apneaScore');
-  const apneaRiskText = document.getElementById('apneaRiskText');
-  const apneaWhatsappBtn = document.getElementById('apneaWhatsappBtn');
-
-  if (!apneaQuizStart || !apneaQuizIntro || !apneaQuizStep || !apneaQuizResult || !apneaQuestionText || !apneaOptions || !apneaQuizProgress || !apneaQuizError || !apneaPrevBtn || !apneaRetryBtn || !apneaScore || !apneaRiskText || !apneaWhatsappBtn) {
-    return;
-  }
-
-  const perguntas = [
-    'Você ronca alto com frequência?',
-    'Alguém já percebeu pausas na sua respiração durante o sono?',
-    'Você acorda cansado(a), mesmo dormindo várias horas?',
-    'Você sente sonolência durante o dia?',
-    'Você acorda com dor de cabeça pela manhã?',
-    'Você tem alguma das doenças a seguir: Pressão alta, aumento do colesterol, diabetes?'
-  ];
-
-  let perguntaAtual = 0;
-  const respostas = new Array(perguntas.length).fill(null);
-
-  const avancarFluxoQuiz = () => {
-    if (perguntaAtual === perguntas.length - 1) {
-      finalizarQuiz();
-      return;
-    }
-
-    perguntaAtual += 1;
-    renderizarPergunta();
-  };
-
-  const renderizarPergunta = () => {
-    const indiceHumano = perguntaAtual + 1;
-    apneaQuizProgress.textContent = `Pergunta ${indiceHumano} de ${perguntas.length}`;
-    apneaQuestionText.textContent = perguntas[perguntaAtual];
-
-    apneaOptions.innerHTML = `
-      <label class="quiz-option ${respostas[perguntaAtual] === 1 ? 'selected' : ''}">
-        <input type="radio" name="apneaResposta" value="1" ${respostas[perguntaAtual] === 1 ? 'checked' : ''}>
-        Sim
-      </label>
-      <label class="quiz-option ${respostas[perguntaAtual] === 0 ? 'selected' : ''}">
-        <input type="radio" name="apneaResposta" value="0" ${respostas[perguntaAtual] === 0 ? 'checked' : ''}>
-        Não
-      </label>
-    `;
-
-    const radios = apneaOptions.querySelectorAll('input[name="apneaResposta"]');
-    radios.forEach((radio) => {
-      radio.addEventListener('change', () => {
-        apneaOptions.querySelectorAll('.quiz-option').forEach((opcao) => {
-          opcao.classList.remove('selected');
-        });
-        if (radio.checked) {
-          radio.closest('.quiz-option')?.classList.add('selected');
-          apneaQuizError.style.display = 'none';
-          respostas[perguntaAtual] = Number(radio.value);
-          setTimeout(() => {
-            avancarFluxoQuiz();
-          }, 200);
-        }
-      });
-    });
-
-    apneaPrevBtn.style.visibility = perguntaAtual === 0 ? 'hidden' : 'visible';
-    apneaQuizError.style.display = 'none';
-  };
-
-  const finalizarQuiz = () => {
-    const total = respostas.reduce((acc, valor) => acc + Number(valor), 0);
-    const porcentagem = Math.round((total / perguntas.length) * 100);
-
-    let classificacao = 'baixo';
-    if (porcentagem > 60) {
-      classificacao = 'alto';
-    } else if (porcentagem > 30) {
-      classificacao = 'moderado';
-    }
-
-    apneaScore.textContent = `${porcentagem}%`;
-    apneaRiskText.textContent = `Seu resultado indica risco ${classificacao} para apneia do sono. Este quiz é apenas informativo e não substitui avaliação clínica.`;
-
-    const mensagem = `Olá! Fiz o quiz de apneia do sono no site e meu resultado foi ${porcentagem}% (risco ${classificacao}). Quero fazer uma avaliação.`;
-    apneaWhatsappBtn.href = `https://api.whatsapp.com/send?phone=5511953415380&text=${encodeURIComponent(mensagem)}`;
-
-    apneaQuizStep.style.display = 'none';
-    apneaQuizResult.style.display = 'block';
-    apneaQuizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-
-  apneaQuizStart.addEventListener('click', () => {
-    apneaQuizIntro.style.display = 'none';
-    apneaQuizResult.style.display = 'none';
-    apneaQuizStep.style.display = 'block';
-    perguntaAtual = 0;
-    respostas.fill(null);
-    renderizarPergunta();
-  });
-
-  apneaPrevBtn.addEventListener('click', () => {
-    if (perguntaAtual > 0) {
-      perguntaAtual -= 1;
-      renderizarPergunta();
-    }
-  });
-
-  apneaRetryBtn.addEventListener('click', () => {
-    apneaQuizResult.style.display = 'none';
-    apneaQuizStep.style.display = 'none';
-    apneaQuizIntro.style.display = 'block';
-    perguntaAtual = 0;
-    respostas.fill(null);
-    apneaQuizError.style.display = 'none';
-    apneaQuizIntro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const beforeAfterVideo = document.getElementById('beforeAfterVideoMain');
-
-  if (!beforeAfterVideo) {
-    return;
-  }
-
-  beforeAfterVideo.muted = true;
-  beforeAfterVideo.loop = true;
-  beforeAfterVideo.autoplay = true;
-  beforeAfterVideo.playsInline = true;
-
-  const tryPlay = () => {
-    const playPromise = beforeAfterVideo.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {});
-    }
-  };
-
-  beforeAfterVideo.addEventListener('loadedmetadata', () => {
-    if (beforeAfterVideo.currentTime < 0.1) {
-      beforeAfterVideo.currentTime = 0.1;
-    }
-  });
-
-  beforeAfterVideo.addEventListener('loadeddata', () => {
-    if (!beforeAfterVideo.videoWidth || !beforeAfterVideo.videoHeight) {
-      tryPlay();
-      return;
-    }
-
-    const canvas = document.createElement('canvas');
-    canvas.width = beforeAfterVideo.videoWidth;
-    canvas.height = beforeAfterVideo.videoHeight;
-
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.drawImage(beforeAfterVideo, 0, 0, canvas.width, canvas.height);
-      beforeAfterVideo.setAttribute('poster', canvas.toDataURL('image/jpeg', 0.85));
-    }
-
-    tryPlay();
-  });
-
-  beforeAfterVideo.addEventListener('canplay', tryPlay);
-  tryPlay();
-});

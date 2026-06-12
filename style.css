@@ -201,22 +201,20 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .whatsapp-float:hover {
-  .logo-mark {
-    width: 34px;
-    height: 34px;
-  }
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  padding: 0;
-  border-bottom: 1px solid rgba(44, 82, 130, 0.1);
-  transition: all 0.3s ease;
+  transform: translateZ(0) scale(1.04);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+}
+
+.whatsapp-float:active {
+  transform: translateZ(0) scale(0.98);
 }
 
 .header:hover {

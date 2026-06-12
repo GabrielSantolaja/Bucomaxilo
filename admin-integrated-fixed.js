@@ -66,6 +66,17 @@ function setupEventListeners() {
     });
   }
 
+  // Garantir fechamento pelo botão X mesmo se outros scripts falharem
+  document.querySelectorAll('.modal-close[data-close-modal]').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = button.getAttribute('data-close-modal');
+      if (modalId) {
+        closeModal(modalId);
+      }
+    });
+  });
+
   // ==================== FECHAR MODALS ====================
   modalLoginAdmin.addEventListener('click', (e) => {
     if (e.target === modalLoginAdmin) {
