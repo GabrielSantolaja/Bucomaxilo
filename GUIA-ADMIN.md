@@ -1,6 +1,6 @@
 # 📋 GUIA DO SISTEMA INTEGRADO
 
-## 🎯 Como Funcionar
+## 🎯 Como Funciona
 
 ### 1️⃣ **Acessar o Menu Admin**
 - No site, procure o botão com **3 pontos verticais** (⋮) no canto superior direito
@@ -10,8 +10,8 @@
 O menu tem 2 opções:
 
 #### 🔐 **Área do Admin**
-- Login: `admin`
-- Senha: `admin123`
+- Login: `Anizzolavojesus`
+- Senha: `bucomaxilofacial2026`
 - Acesso completo ao painel administrativo
 
 #### 👤 **Área do Paciente**
@@ -44,7 +44,7 @@ Após fazer login como admin, você terá acesso a:
 
 ## 🔒 **Alterar Senha do Admin**
 
-Edite o arquivo `admin-integrated.js` na linha 2:
+Edite o arquivo `admin-integrated-fixed.js` na linha 4:
 
 ```javascript
 const ADMIN_PASS = 'SUA_SENHA_AQUI';
@@ -77,7 +77,7 @@ const ADMIN_PASS = 'SUA_SENHA_AQUI';
 1. **Acesse o site** (`index.html`)
 2. **Clique nos 3 pontos** (⋮) no header
 3. **Selecione "Área do Admin"**
-4. **Faça login** (admin/admin123)
+4. **Faça login** (Anizzolavojesus/bucomaxilofacial2026)
 5. **Preencha o formulário** com:
    - Título do post
    - Resumo (breve descrição)
@@ -118,7 +118,7 @@ Para backup, você pode exportar os dados ou conectar a um banco de dados real.
 ## 📞 **Suporte**
 
 Para dúvidas ou personalizações:
-- Os arquivos principais são: `index.html`, `admin-integrated.js`, `style.css`
+- Os arquivos principais são: `index.html`, `admin-integrated-fixed.js`, `style.css`
 - Tudo está comentado e organizado
 - Código limpo e fácil de modificar
 
