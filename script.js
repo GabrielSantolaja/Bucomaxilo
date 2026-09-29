@@ -176,12 +176,6 @@ document.querySelectorAll('.especialidade-card, .blog-card, .caso-card, .depoime
 // ==================== NEWSLETTER ====================
 const newsletterForm = document.querySelector('.newsletter-form');
 
-const getHookElement = (hookClass, fallbackId) => {
-  return document.querySelector(`.${hookClass}`) || document.getElementById(fallbackId);
-};
-
-const btnMenu = getHookElement('js-btn-menu', 'btn-menu');
-const navLinks = getHookElement('js-nav-links', 'nav-links');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', function(e) {
     e.preventDefault();

@@ -4,6 +4,7 @@ function loadBlogPosts() {
   const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
   const blogGrid = document.querySelector('.blog-grid');
   const blogCtaLink = document.querySelector('.blog-cta .btn-secondary');
+  const fallbackImage = 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop';
   
   if (!blogGrid) return;
   
@@ -32,7 +33,9 @@ function loadBlogPosts() {
   
   blogGrid.innerHTML = recentPosts.map(post => `
     <article class="blog-card" onclick="openPost('${post.id}')">
-      <div class="blog-image" style="background-image: url('${post.image}')"></div>
+      <div class="blog-image">
+        <img src="${post.image || fallbackImage}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackImage}'">
+      </div>
       <div class="blog-content">
         <div class="blog-meta">
           <span><i class="fas fa-calendar"></i> ${post.date}</span>
@@ -55,6 +58,7 @@ function loadBlogPosts() {
 function openPost(id) {
   const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
   const post = posts.find(p => p.id === id);
+  const fallbackImage = 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop';
   
   if (!post) return;
   
@@ -69,7 +73,7 @@ function openPost(id) {
       </button>
       
       <div class="post-header">
-        <img src="${post.image}" alt="${post.title}">
+        <img src="${post.image || fallbackImage}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackImage}'">
         <div class="post-header-info">
           <span class="post-category">${post.category}</span>
           <h1>${post.title}</h1>
@@ -175,8 +179,10 @@ modalStyles.textContent = `
   
   .post-header img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: min(360px, 52vh);
+    object-fit: contain;
+    object-position: center;
+    background: #f3f6fb;
   }
   
   .post-header-info {
@@ -264,7 +270,7 @@ modalStyles.textContent = `
     }
     
     .post-header img {
-      height: 250px;
+      height: min(240px, 36vh);
     }
     
     .post-header-info,
