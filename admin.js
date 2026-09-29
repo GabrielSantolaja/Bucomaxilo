@@ -13,10 +13,26 @@ const postsList = document.getElementById('postsList');
 const btnLogout = document.getElementById('btnLogout');
 const btnCancel = document.getElementById('btnCancel');
 const formTitle = document.getElementById('formTitle');
+const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+const passwordEyeIcon = document.getElementById('passwordEyeIcon');
 
 const imageUpload = document.getElementById('imageUpload');
 const postImage = document.getElementById('postImage');
 const imagePreview = document.getElementById('imagePreview');
+
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById('password');
+  if (!passwordInput || !passwordEyeIcon) return;
+
+  const isHidden = passwordInput.type === 'password';
+  passwordInput.type = isHidden ? 'text' : 'password';
+  passwordEyeIcon.classList.toggle('fa-eye', !isHidden);
+  passwordEyeIcon.classList.toggle('fa-eye-slash', isHidden);
+}
+
+if (togglePasswordBtn) {
+  togglePasswordBtn.addEventListener('click', togglePasswordVisibility);
+}
 
 // ==================== STORAGE ====================
 let posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
