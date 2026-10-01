@@ -77,6 +77,18 @@ function toggleAdminPassword() {
   }
 }
 
+function openAdminPanelFallback() {
+  const panel = document.getElementById('adminPanelIntegrated');
+  if (panel) {
+    panel.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('admin-open');
+    return;
+  }
+
+  window.location.href = 'admin.html';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-close-modal]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -108,6 +120,35 @@ document.addEventListener('DOMContentLoaded', () => {
         adminDropdown.classList.remove('show');
       }
       adminModal.classList.add('show');
+    });
+  }
+
+  // Fallback: evita refresh do form e garante login do admin mesmo com falha no script integrado.
+  const adminLoginForm = document.getElementById('adminLoginForm');
+  if (adminLoginForm && !adminLoginForm.dataset.fallbackBound) {
+    adminLoginForm.dataset.fallbackBound = 'true';
+    adminLoginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const username = (document.getElementById('adminUsername')?.value || '').trim();
+      const password = (document.getElementById('adminPassword')?.value || '').trim();
+      const errorMessage = document.getElementById('adminErrorMessage');
+
+      if (username === 'Anizzolavojesus' && password === 'bucomaxilofacial2026') {
+        if (adminModal) {
+          adminModal.classList.remove('show');
+        }
+        openAdminPanelFallback();
+        adminLoginForm.reset();
+        return;
+      }
+
+      if (errorMessage) {
+        errorMessage.classList.add('show');
+        setTimeout(() => {
+          errorMessage.classList.remove('show');
+        }, 3000);
+      }
     });
   }
 
