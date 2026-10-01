@@ -87,6 +87,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Fallback: garante abertura do modal admin mesmo se o script integrado não carregar.
+  const btnAdminMenu = getHookElement('js-admin-menu', 'btnAdminMenu');
+  const btnLoginTrigger = getHookElement('js-admin-login-trigger', 'btnLogin');
+  const adminModal = document.getElementById('modalLoginAdmin');
+  const adminDropdown = document.getElementById('adminDropdown');
+
+  if (btnAdminMenu && adminModal) {
+    btnAdminMenu.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      adminModal.classList.add('show');
+    });
+  }
+
+  if (btnLoginTrigger && adminModal) {
+    btnLoginTrigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (adminDropdown) {
+        adminDropdown.classList.remove('show');
+      }
+      adminModal.classList.add('show');
+    });
+  }
+
   const adminTogglePassword = getHookElement('js-admin-toggle-password', 'adminTogglePassword');
   if (adminTogglePassword) {
     adminTogglePassword.addEventListener('click', toggleAdminPassword);
