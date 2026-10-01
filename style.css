@@ -2986,6 +2986,8 @@ img {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
 .image-upload-area:hover {
@@ -2997,6 +2999,21 @@ img {
   font-size: 3rem;
   color: var(--secondary-color);
   margin-bottom: 10px;
+}
+
+.image-upload {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-input-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .image-preview {
