@@ -79,13 +79,30 @@ function toggleAdminPassword() {
 
 function openAdminPanelFallback() {
   const panel = document.getElementById('adminPanelIntegrated');
-  if (panel) {
+  const integratedReady = window.__adminIntegratedReady === true;
+
+  if (panel && integratedReady) {
     panel.classList.add('show');
     document.body.style.overflow = 'hidden';
     document.body.classList.add('admin-open');
+
+    // Garantir que sempre abra na aba de Blog
+    document.querySelectorAll('.admin-tab').forEach((tab) => tab.classList.remove('active'));
+    document.querySelectorAll('.admin-tab-content').forEach((content) => content.classList.remove('active'));
+    const blogTabButton = document.querySelector('.admin-tab[data-tab="blog"]');
+    const blogTabContent = document.getElementById('tabBlog');
+    if (blogTabButton) blogTabButton.classList.add('active');
+    if (blogTabContent) blogTabContent.classList.add('active');
+
+    if (typeof window.loadAdminPosts === 'function') {
+      window.loadAdminPosts();
+    }
     return;
   }
 
+  // Fallback sem exigir novo login no admin.html
+  localStorage.setItem('adminLoggedIn', 'true');
+  sessionStorage.setItem('adminAutologin', 'true');
   window.location.href = 'admin.html';
 }
 
@@ -128,6 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (adminLoginForm && !adminLoginForm.dataset.fallbackBound) {
     adminLoginForm.dataset.fallbackBound = 'true';
     adminLoginForm.addEventListener('submit', (event) => {
+      if (window.__adminIntegratedReady === true) {
+        return;
+      }
+
       event.preventDefault();
 
       const username = (document.getElementById('adminUsername')?.value || '').trim();
@@ -162,6 +183,22 @@ document.addEventListener('DOMContentLoaded', () => {
     patientForgotPasswordLink.addEventListener('click', (event) => {
       event.preventDefault();
       alert('Entre em contato com a clínica para recuperar sua senha.');
+    });
+  }
+
+  // Fallback: sair do painel admin mesmo sem handler do script integrado.
+  const btnCloseAdmin = document.getElementById('btnCloseAdmin');
+  const adminPanel = document.getElementById('adminPanelIntegrated');
+  if (btnCloseAdmin && adminPanel && !btnCloseAdmin.dataset.fallbackBound) {
+    btnCloseAdmin.dataset.fallbackBound = 'true';
+    btnCloseAdmin.addEventListener('click', () => {
+      const confirmar = confirm('Deseja sair do painel administrativo?');
+      if (!confirmar) return;
+
+      adminPanel.classList.remove('show');
+      document.body.style.overflow = 'auto';
+      document.body.classList.remove('admin-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 });

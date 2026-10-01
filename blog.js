@@ -100,7 +100,7 @@ function openPost(id) {
           <h1>${post.title}</h1>
           <div class="post-meta">
             <span><i class="fas fa-calendar"></i> ${post.date}</span>
-            <span><i class="fas fa-user"></i> Dr. Bucomaxilo</span>
+            <span><i class="fas fa-user"></i> Dr. Anizzolavo Jesus</span>
           </div>
         </div>
       </div>

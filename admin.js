@@ -104,11 +104,17 @@ loginForm.addEventListener('submit', (e) => {
 // ==================== LOGOUT ====================
 btnLogout.addEventListener('click', () => {
   localStorage.removeItem('adminLoggedIn');
-  location.reload();
+  window.location.href = 'index.html';
 });
 
 // ==================== VERIFICAR LOGIN ====================
 function checkLogin() {
+  const autoLogin = sessionStorage.getItem('adminAutologin');
+  if (autoLogin === 'true') {
+    localStorage.setItem('adminLoggedIn', 'true');
+    sessionStorage.removeItem('adminAutologin');
+  }
+
   const isLoggedIn = localStorage.getItem('adminLoggedIn');
   if (isLoggedIn === 'true') {
     showAdminPanel();

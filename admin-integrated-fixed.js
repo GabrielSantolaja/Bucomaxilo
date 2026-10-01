@@ -3,6 +3,7 @@
 const ADMIN_USER = 'Anizzolavojesus';
 const ADMIN_PASS = 'bucomaxilofacial2026';
 const POSTS_API_URL = 'api/posts.php';
+window.__adminIntegratedReady = false;
 
 function getPostsFromLocalStorage() {
   return JSON.parse(localStorage.getItem('blogPosts')) || [];
@@ -61,8 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeElements();
   if (btnAdminMenu) {
     setupEventListeners();
+    window.__adminIntegratedReady = true;
     console.log('Sistema Admin Integrado carregado! 🚀');
   } else {
+    window.__adminIntegratedReady = false;
     console.error('Elementos do admin não encontrados!');
   }
 });
@@ -205,6 +208,15 @@ function openAdminPanel() {
   adminPanelIntegrated.classList.add('show');
   document.body.style.overflow = 'hidden';
   document.body.classList.add('admin-open');
+
+  // Garantir abertura na aba de Blog
+  document.querySelectorAll('.admin-tab').forEach((tab) => tab.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach((content) => content.classList.remove('active'));
+  const blogTabButton = document.querySelector('.admin-tab[data-tab="blog"]');
+  const blogTabContent = document.getElementById('tabBlog');
+  if (blogTabButton) blogTabButton.classList.add('active');
+  if (blogTabContent) blogTabContent.classList.add('active');
+
   loadAdminPosts();
 }
 
