@@ -2,6 +2,51 @@
 // ==================== CONFIGURAÇÕES ====================
 const ADMIN_USER = 'Anizzolavojesus';
 const ADMIN_PASS = 'bucomaxilofacial2026';
+const POSTS_API_URL = 'api/posts.php';
+
+function getPostsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('blogPosts')) || [];
+}
+
+async function getPosts() {
+  try {
+    const response = await fetch(`${POSTS_API_URL}?t=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Falha ao carregar posts da API');
+
+    const data = await response.json();
+    const posts = Array.isArray(data.posts) ? data.posts : [];
+    const localPosts = getPostsFromLocalStorage();
+
+    if (posts.length === 0 && localPosts.length > 0) {
+      await savePosts(localPosts);
+      return localPosts;
+    }
+
+    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    return posts;
+  } catch (error) {
+    console.warn('Usando posts locais (fallback):', error.message);
+    return getPostsFromLocalStorage();
+  }
+}
+
+async function savePosts(posts) {
+  localStorage.setItem('blogPosts', JSON.stringify(posts));
+
+  try {
+    const response = await fetch(POSTS_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ posts })
+    });
+
+    if (!response.ok) throw new Error('Falha ao salvar posts na API');
+    return true;
+  } catch (error) {
+    console.warn('Falha ao salvar na API, mantido localmente:', error.message);
+    return false;
+  }
+}
 
 // ==================== ELEMENTOS DOM ====================
 let btnAdminMenu, adminDropdown, btnLogin;
@@ -212,7 +257,7 @@ function setupImageUpload() {
 function setupBlogForm() {
   if (!adminBlogForm) return;
 
-  adminBlogForm.addEventListener('submit', (e) => {
+  adminBlogForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const postId = document.getElementById('adminPostId').value;
@@ -222,7 +267,7 @@ function setupBlogForm() {
     const category = document.getElementById('adminPostCategory').value;
     const image = adminImagePreview.src || 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop';
     
-    let posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    let posts = await getPosts();
     
     const post = {
       id: postId || Date.now().toString(),
@@ -242,7 +287,7 @@ function setupBlogForm() {
       posts.unshift(post);
     }
     
-    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    await savePosts(posts);
     
     adminSuccessMessage.classList.add('show');
     setTimeout(() => {
@@ -276,10 +321,10 @@ function setupBlogForm() {
   }
 }
 
-function loadAdminPosts() {
+async function loadAdminPosts() {
   if (!adminPostsList) return;
 
-  const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  const posts = await getPosts();
   
   if (posts.length === 0) {
     adminPostsList.innerHTML = `
@@ -315,7 +360,7 @@ function loadAdminPosts() {
 }
 
 function editAdminPost(id) {
-  const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  const posts = getPostsFromLocalStorage();
   const post = posts.find(p => p.id === id);
   if (!post) return;
   
@@ -339,11 +384,11 @@ function editAdminPost(id) {
   if (activeTab) activeTab.scrollTop = 0;
 }
 
-function deleteAdminPost(id) {
+async function deleteAdminPost(id) {
   if (confirm('Tem certeza que deseja excluir este post?')) {
-    let posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    let posts = await getPosts();
     posts = posts.filter(p => p.id !== id);
-    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    await savePosts(posts);
     loadAdminPosts();
     
     if (typeof loadBlogPosts === 'function') {

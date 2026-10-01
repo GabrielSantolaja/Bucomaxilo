@@ -1,7 +1,28 @@
 // ==================== CARREGAR POSTS DO BLOG ====================
 
-function loadBlogPosts() {
-  const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+const POSTS_API_URL = 'api/posts.php';
+
+function getPostsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('blogPosts')) || [];
+}
+
+async function getPosts() {
+  try {
+    const response = await fetch(`${POSTS_API_URL}?t=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Falha ao carregar posts da API');
+
+    const data = await response.json();
+    const posts = Array.isArray(data.posts) ? data.posts : [];
+    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    return posts;
+  } catch (error) {
+    console.warn('Usando posts locais (fallback):', error.message);
+    return getPostsFromLocalStorage();
+  }
+}
+
+async function loadBlogPosts() {
+  const posts = await getPosts();
   const blogGrid = document.querySelector('.blog-grid');
   const blogCtaLink = document.querySelector('.blog-cta .btn-secondary');
   const fallbackImage = 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop';
@@ -56,7 +77,7 @@ function loadBlogPosts() {
 
 // ==================== ABRIR POST COMPLETO ====================
 function openPost(id) {
-  const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  const posts = getPostsFromLocalStorage();
   const post = posts.find(p => p.id === id);
   const fallbackImage = 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop';
   
@@ -109,7 +130,7 @@ function closePostModal() {
 }
 
 function sharePost(id) {
-  const posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  const posts = getPostsFromLocalStorage();
   const post = posts.find(p => p.id === id);
   
   if (!post) return;
@@ -283,7 +304,11 @@ modalStyles.textContent = `
 document.head.appendChild(modalStyles);
 
 // ==================== INICIALIZAR ====================
-document.addEventListener('DOMContentLoaded', loadBlogPosts);
+document.addEventListener('DOMContentLoaded', () => {
+  loadBlogPosts();
+});
 
 // Recarregar posts a cada 30 segundos (caso admin adicione novos)
-setInterval(loadBlogPosts, 30000);
+setInterval(() => {
+  loadBlogPosts();
+}, 30000);

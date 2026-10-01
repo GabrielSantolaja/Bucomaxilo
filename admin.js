@@ -1,6 +1,51 @@
 // ==================== CONFIGURAÇÕES ====================
 const ADMIN_USER = 'Anizzolavojesus';
 const ADMIN_PASS = 'bucomaxilofacial2026';
+const POSTS_API_URL = 'api/posts.php';
+
+function getPostsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('blogPosts')) || [];
+}
+
+async function getPosts() {
+  try {
+    const response = await fetch(`${POSTS_API_URL}?t=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Falha ao carregar posts da API');
+
+    const data = await response.json();
+    const posts = Array.isArray(data.posts) ? data.posts : [];
+    const localPosts = getPostsFromLocalStorage();
+
+    if (posts.length === 0 && localPosts.length > 0) {
+      await savePosts(localPosts);
+      return localPosts;
+    }
+
+    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    return posts;
+  } catch (error) {
+    console.warn('Usando posts locais (fallback):', error.message);
+    return getPostsFromLocalStorage();
+  }
+}
+
+async function savePosts(posts) {
+  localStorage.setItem('blogPosts', JSON.stringify(posts));
+
+  try {
+    const response = await fetch(POSTS_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ posts })
+    });
+
+    if (!response.ok) throw new Error('Falha ao salvar posts na API');
+    return true;
+  } catch (error) {
+    console.warn('Falha ao salvar na API, mantido localmente:', error.message);
+    return false;
+  }
+}
 
 // ==================== ELEMENTOS DOM ====================
 const loginContainer = document.getElementById('loginContainer');
@@ -120,7 +165,7 @@ imageUpload.addEventListener('drop', (e) => {
 });
 
 // ==================== SALVAR POST ====================
-blogForm.addEventListener('submit', (e) => {
+blogForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const postId = document.getElementById('postId').value;
@@ -130,6 +175,8 @@ blogForm.addEventListener('submit', (e) => {
   const category = document.getElementById('postCategory').value;
   const image = imagePreview.src || 'https://via.placeholder.com/800x400?text=Sem+Imagem';
   
+  posts = await getPosts();
+
   const post = {
     id: postId || Date.now().toString(),
     title,
@@ -151,7 +198,7 @@ blogForm.addEventListener('submit', (e) => {
   }
   
   // Salvar no localStorage
-  localStorage.setItem('blogPosts', JSON.stringify(posts));
+  await savePosts(posts);
   
   // Mostrar mensagem de sucesso
   successMessage.style.display = 'block';
@@ -183,8 +230,8 @@ btnCancel.addEventListener('click', () => {
 });
 
 // ==================== CARREGAR POSTS ====================
-function loadPosts() {
-  posts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+async function loadPosts() {
+  posts = await getPosts();
   
   if (posts.length === 0) {
     postsList.innerHTML = `
@@ -243,10 +290,11 @@ function editPost(id) {
 }
 
 // ==================== DELETAR POST ====================
-function deletePost(id) {
+async function deletePost(id) {
   if (confirm('Tem certeza que deseja excluir este post?')) {
+    posts = getPostsFromLocalStorage();
     posts = posts.filter(p => p.id !== id);
-    localStorage.setItem('blogPosts', JSON.stringify(posts));
+    await savePosts(posts);
     loadPosts();
   }
 }
