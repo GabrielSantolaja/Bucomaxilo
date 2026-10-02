@@ -3,9 +3,59 @@ document.addEventListener('DOMContentLoaded', () => {
     return document.querySelector(`.${hookClass}`) || document.getElementById(fallbackId);
   };
 
+  const escapeHtml = (value) => {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  };
+
+  const renderVideos = (videoCarousel, videos) => {
+    if (!Array.isArray(videos) || videos.length === 0) {
+      return;
+    }
+
+    videoCarousel.innerHTML = videos.map((video) => {
+      const videoId = escapeHtml(video.id);
+      const title = escapeHtml(video.title || 'Conteúdo do canal do Dr. Anizzolavo');
+      return `
+        <article class="video-card">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/${videoId}" title="${title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3>${title}</h3>
+        </article>
+      `;
+    }).join('');
+  };
+
+  const loadVideosFromChannel = async (videoCarousel) => {
+    try {
+      const response = await fetch(`api/youtube-videos.php?max=30&t=${Date.now()}`, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Erro HTTP ${response.status}`);
+      }
+
+      const payload = await response.json();
+      if (!payload || payload.success !== true || !Array.isArray(payload.videos)) {
+        throw new Error('Payload inválido da API de vídeos');
+      }
+
+      renderVideos(videoCarousel, payload.videos);
+    } catch (error) {
+      console.warn('Falha ao atualizar vídeos automaticamente. Mantendo fallback estático.', error.message);
+    }
+  };
+
   const videoCarousel = getHookElement('js-video-carousel', 'videoCarousel');
   const videoPrev = getHookElement('js-video-prev', 'videoPrev');
   const videoNext = getHookElement('js-video-next', 'videoNext');
+
+  if (videoCarousel) {
+    loadVideosFromChannel(videoCarousel);
+  }
 
   if (videoCarousel && videoPrev && videoNext) {
     const scrollAmount = () => {
